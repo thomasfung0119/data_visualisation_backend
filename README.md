@@ -23,7 +23,7 @@ $ virtualenv env
 $ .\env\Scripts\activate
 ```
 
-**Step #3** - Install dependencies in virtualenv
+**Step #2** - Install dependencies in virtualenv
 
 ```bash
 $ pip install -r requirements.txt
@@ -40,8 +40,9 @@ $ $env:FLASK_ENV = "development"
 ```
 
 **Step #4** - start test APIs server at `localhost:5000`
+```bash
 $ flask run
-
+```
 
 ## Project Structure
     api-server-flask/
