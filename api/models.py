@@ -23,16 +23,9 @@ class Data(db.Model):
     DeathWithExercise = db.Column(db.Integer())
 
     @classmethod
-    def querySumFromCountry(cls, country):
-        return cls.query.filter_by(Country=country)
-    @classmethod
-    def queryCaseFromCountry(cls, country):
-        return cls.query.filter_by(Country=country)
-
-    @classmethod
     def queryMultipleFromCountry(cls, country):
         return cls.query.filter_by(Country=country)
-
+    
     def toFullJSON(self):
         temp = {}
         temp['Date'] = self.Date
