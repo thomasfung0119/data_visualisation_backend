@@ -27,9 +27,7 @@ class AllData(Resource):
     @rest_api.expect(validate=True)
     def get(self):
         data = Data.queryAll()
-        returnList = [i.toCountryJSON() for i in data]
-
-        return returnList, 200
+        return data, 200
 
 @rest_api.route('/api/getData')
 class MultiData(Resource):
