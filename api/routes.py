@@ -20,17 +20,13 @@ rest_api = Api(version="1.0", title="Users API")
 
 getData_model = rest_api.model('getData', {"country": fields.String(required=True, min_length=2, max_length=32)})
 
+@rest_api.route('/api/getAll')
+class AllData(Resource):
 
-@rest_api.route('/api/getData')
-class MultiData(Resource):
-
-    @rest_api.expect(getData_model, validate=True)
-    def post(self):
-        req_data = request.get_json()
-        _country = req_data.get("country")
-
-        data = Data.queryMultipleFromCountry(_country)
-        returnList = [i.toFullJSON() for i in data]
+    @rest_api.expect(validate=True)
+    def get(self):
+        data = Data.queryAll()
+        returnList = [i.toCountryJSON() for i in data]
 
         return returnList, 200
 

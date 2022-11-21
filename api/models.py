@@ -24,8 +24,12 @@ class Data(db.Model):
 
     @classmethod
     def queryMultipleFromCountry(cls, country):
-        return cls.query.filter_by(Country=country)
-    
+        return cls.query.filter_by(Country=country).all()
+
+    @classmethod
+    def queryAll(cls):
+        return cls.query.all()
+
     def toFullJSON(self):
         temp = {}
         temp['Date'] = self.Date
@@ -35,4 +39,16 @@ class Data(db.Model):
         temp['DeathWithSmoke'] = self.DeathWithSmoke
         temp['DeathWithExercise'] = self.DeathWithExercise
         return temp
+    
+    def toCountryJSON(self):
+        temp = {}
+        temp['Date'] = self.Date
+        temp['Country'] = self.Country
+        temp['ConfirmedCase'] = self.ConfirmedCase
+        temp['DeathCase'] = self.DeathCase
+        temp['DeathWithVaccine'] = self.DeathWithVaccine
+        temp['DeathWithSmoke'] = self.DeathWithSmoke
+        temp['DeathWithExercise'] = self.DeathWithExercise
+        return temp
+
 
