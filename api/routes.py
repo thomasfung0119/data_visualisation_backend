@@ -18,7 +18,8 @@ rest_api = Api(version="1.0", title="Users API")
     Flask-Restx models for api request and response data
 """
 
-getData_model = rest_api.model('getData', {"country": fields.String(required=True, min_length=2, max_length=32)})
+parser = rest_api.parser()
+parser.add_argument('country', type=str , help='Chosen Country')
 
 @rest_api.route('/api/getAll')
 class AllData(Resource):
@@ -33,10 +34,9 @@ class AllData(Resource):
 @rest_api.route('/api/getData')
 class MultiData(Resource):
 
-    @rest_api.expect(getData_model, validate=True)
-    def post(self):
-        req_data = request.get_json()
-        _country = req_data.get("country")
+    @rest_api.expect(parser, validate=True)
+    def get(self):
+        _country = request.args.get('country')
 
         data = Data.queryMultipleFromCountry(_country)
         returnList = [i.toFullJSON() for i in data]
@@ -46,10 +46,9 @@ class MultiData(Resource):
 @rest_api.route('/api/getSumUpData')
 class SumUpData(Resource):
 
-    @rest_api.expect(getData_model, validate=True)
-    def post(self):
-        req_data = request.get_json()
-        _country = req_data.get("country")
+    @rest_api.expect(parser, validate=True)
+    def get(self):
+        _country = request.args.get('country')
 
         data = Data.queryMultipleFromCountry(_country)
         returnList = [i.toFullJSON() for i in data]
