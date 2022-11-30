@@ -38,8 +38,9 @@ $ $env:FLASK_ENV = "development"
 ```
 
 **Step #4** - start test APIs server at `localhost:5000`
+```bash
 $ flask run
-
+```
 
 ## Project Structure
     api-server-flask/
