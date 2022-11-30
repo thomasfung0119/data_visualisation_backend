@@ -1,6 +1,4 @@
-## Flask API Server
-
-> Start the app in Docker
+## Start the app in Docker
 
 ```bash
 $ docker-compose pull   # download dependencies 
@@ -10,7 +8,7 @@ $ docker-compose up     # start the app
 
 Visit `http://localhost:5000` in your browser. The app should be up & running.
 
-## How to use the code
+## Start the app without Docker
 
 **Step #1** - create virtual environment using python3 and activate it (keep it outside our project directory)
 ```bash
