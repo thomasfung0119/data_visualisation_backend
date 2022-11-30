@@ -50,9 +50,13 @@ class SumUpData(Resource):
 
         data = Data.queryMultipleFromCountry(_country)
         returnList = [i.toFullJSON() for i in data]
-        ConfirmedCase = sum([i['ConfirmedCase'] for i in returnList])
         MortalityCase = sum([i['DeathCase'] for i in returnList])
         VaccinatedDeathCase = sum([i['DeathWithVaccine'] for i in returnList])
-        Correlation = round(VaccinatedDeathCase/MortalityCase, 4)*100
+        SmokeDeathCase = sum([i['DeathWithSmoke'] for i in returnList])
+        ExerciseDeathCase = sum([i['DeathWithExercise'] for i in returnList])
 
-        return {'ConfirmedCase':ConfirmedCase, 'MortalityCase':MortalityCase, 'VaccinatedDeathCase':VaccinatedDeathCase, 'CorrelationInPercentage':Correlation}, 200
+        VaccineCorrelation = 100 - round(VaccinatedDeathCase/MortalityCase, 4)*100
+        SmokeCorrelation = round(SmokeDeathCase/MortalityCase, 4)*100
+        ExerciseCorrelation = 100 - round(ExerciseDeathCase/MortalityCase, 4)*100
+
+        return {'MortalityCase':MortalityCase, 'VaccineCorrelation':VaccineCorrelation, 'SmokeCorrelation':SmokeCorrelation, 'ExerciseCorrelation':ExerciseCorrelation}, 200
